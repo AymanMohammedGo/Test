@@ -94,7 +94,10 @@ const UserInformationForm = () => {
         </div>
 
         <div className="flex items-center w-full">
-          <label htmlFor="age" className="font-semibold text-lg text-center mx-3 w-[25%]">
+          <label
+            htmlFor="age"
+            className="font-semibold text-lg text-center mx-3 w-[25%]"
+          >
             العمر
           </label>
           <input

@@ -2,14 +2,7 @@ import Image from "next/image";
 import SurveyProgress from "./ui/SurveyProgress";
 import LoginButton from "./ui/LoginButton";
 
-const SurveyOverview = ({
-  imgURL,
-  title,
-  des,
-  step,
-  textProgress,
-  progress,
-}) => {
+const SurveyOverview = ({ imgURL, title, des }) => {
   return (
     <>
       <Image
@@ -25,11 +18,7 @@ const SurveyOverview = ({
       <div className="absolute bottom-9 right-0 text-white w-full p-8   ">
         <h1 className="font-semibold text-5xl mb-5">{title}</h1>
         <p className="text-xs text-white/70 mb-8">{des}</p>
-        <SurveyProgress
-          step={step}
-          textProgress={textProgress}
-          progress={progress}
-        />
+        <SurveyProgress />
       </div>
     </>
   );

@@ -1,8 +1,8 @@
-import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const navItems = [
   {
-    id: 1,
+    id: 2,
     title: "الموافقة",
     icon: (
       <svg
@@ -23,7 +23,7 @@ const navItems = [
     ),
   },
   {
-    id: 2,
+    id: 1,
     title: "الأسئلة",
     icon: (
       <svg
@@ -45,7 +45,7 @@ const navItems = [
     ),
   },
   {
-    id: 3,
+    id: 0,
     title: "المعلومات الخاصة بك",
     icon: (
       <svg
@@ -67,21 +67,23 @@ const navItems = [
     ),
   },
 ];
-const SurveryNavBar = ({ action }) => {
+const SurveryNavBar = () => {
+  const sectionShow = useSelector((state) => state.section.sectionShow);
+
   return (
     <nav className="flex items-center pb-20 ">
       {navItems.map((item, index) => (
         <div key={index} className="flex items-center w-full ">
           <span
             className={`font-bold text-lg ${
-              action === index ? "text-primary" : "text-secondary"
+              sectionShow === item.id ? "text-primary" : "text-secondary"
             }  `}
           >
             {item.title}
           </span>
           <span
             className={`${
-              action === index ? "text-primary" : "text-secondary"
+              sectionShow === item.id ? "text-primary" : "text-secondary"
             } mx-4 `}
           >
             {item.icon}
@@ -89,7 +91,7 @@ const SurveryNavBar = ({ action }) => {
           {index !== navItems.length - 1 && (
             <div
               className={`w-full h-[1px] ml-4 ${
-                action === index ? "bg-primary" : "bg-secondary"
+                sectionShow === item.id ? "bg-primary" : "bg-secondary"
               }`}
             ></div>
           )}

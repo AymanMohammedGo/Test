@@ -1,4 +1,5 @@
 import { Cairo } from "next/font/google";
+import ClientProvider from "./ClientProvider";
 import "./globals.css";
 
 const cairo = Cairo({ subsets: ["latin"] });
@@ -10,8 +11,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="bg-[#f5f5f5] " dir="rtl">
-      <body className={cairo.className}>{children}</body>
+    <html lang="ar" className="bg-[#f5f5f5] " dir="rtl">
+      <body className={cairo.className}>
+        <ClientProvider>{children}</ClientProvider>
+      </body>
     </html>
   );
 }
