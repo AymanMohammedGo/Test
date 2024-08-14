@@ -26,7 +26,7 @@ const LoginForm = () => {
       const data = await response.json();
       if (data.data.token) {
         dispatch(loginSuccess(data.data.token));
-        router.push("/dashborad");
+        router.push("/dashboard");
       } else {
         setError("البريد الإلكتروني أو كلمة المرور غير صحيحة");
       }
