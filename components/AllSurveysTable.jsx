@@ -1,13 +1,15 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import ConfirmationDialog from "./ui/ConfirmationDialog";
+import PollUsersListDialog from "./ui/PollUsersListDialog";
 
 const AllSurveysTable = ({ data, setData }) => {
   const [averages, setAverages] = useState({});
   const [selectedPollId, setSelectedPollId] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDialogOpenUserList, setIsDialogOpenUserList] = useState(false);
 
-  const PullResults = async (id) => {
+  const PollResults = async (id) => {
     const url = `https://test.omar.rs4it.com/solve/${id}`;
     const requestOptions = {
       method: "GET",
@@ -49,7 +51,7 @@ const AllSurveysTable = ({ data, setData }) => {
     const fetchAverages = async () => {
       const newAverages = {};
       for (const item of data) {
-        const result = await PullResults(item.id);
+        const result = await PollResults(item.id);
         if (result) {
           const correctAnswers = result.data.answers.filter(
             (item) => item.answer.points === 3
@@ -88,6 +90,7 @@ const AllSurveysTable = ({ data, setData }) => {
     setIsDialogOpen(false);
     setSelectedPollId(null);
   };
+
   return (
     <table className="w-full my-3">
       <thead>
@@ -103,7 +106,14 @@ const AllSurveysTable = ({ data, setData }) => {
       <tbody>
         {data?.map((item, index) => (
           <tr key={index} className="border-b border-gray-200 text-secondary">
-            <td className="text-sm p-2">{item.title}</td>
+            <td
+              className="text-sm p-2 cursor-pointer"
+              onClick={() => {
+                setSelectedPollId(item.id), setIsDialogOpenUserList(true);
+              }}
+            >
+              {item.title}
+            </td>
             <td className="text-sm p-2">{item.questions.length}</td>
             <td className="text-sm p-2 ">
               <div className="flex  items-center">
@@ -140,7 +150,10 @@ const AllSurveysTable = ({ data, setData }) => {
                     <line x1="14" x2="14" y1="11" y2="17" />
                   </svg>
                 </Link>
-                <Link href="#" className="mx-2 text-secondary">
+                <Link
+                  href={`/dashboard/${item.id}`}
+                  className="mx-2 text-secondary"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -165,6 +178,11 @@ const AllSurveysTable = ({ data, setData }) => {
           isOpen={isDialogOpen}
           onConfirm={handleDelete}
           onCancel={closeDialog}
+        />
+        <PollUsersListDialog
+          setOpenDialog={setIsDialogOpenUserList}
+          OpenDialog={isDialogOpenUserList}
+          pollID={selectedPollId}
         />
       </tbody>
     </table>

@@ -13,11 +13,11 @@ const Dashborad = () => {
   const token = useSelector((state) => state.auth.token);
   const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     router.push("/login");
-  //   }
-  // }, [token, router]);
+  useEffect(() => {
+    if (!token) {
+      router.push("/login");
+    }
+  }, [token, router]);
   const FetchAllPollsData = async () => {
     const url = "https://test.omar.rs4it.com/poll";
     const requestOptions = {
@@ -40,16 +40,16 @@ const Dashborad = () => {
     FetchAllPollsData();
   }, []);
   return (
-    <div className="max-w-screen-xl  h-[800px]  flex my-12  m-auto">
-      <div className="bg-white w-[80%] h-full flex flex-col   px-12 py-8">
+    <div className="max-w-screen-xl h-full lg:h-[800px]  flex lg:my-12 flex-col lg:flex-row  m-auto">
+      <div className="bg-white w-full lg:w-[80%] h-full flex flex-col  px-4 lg:px-12 py-8">
         <AdminNavBar />
         <AdminStatistics />
         <div className="p-5 shadow-custom rounded-2xl h-full">
-          <TableNavBar />
+          <TableNavBar title="الأستطلاعات" />
           <AllSurveysTable data={data} setData={setData} />
         </div>
       </div>
-      <div className="w-[20%] h-full relative">
+      <div className="hidden lg:block lg:w-[20%] h-full relative">
         <Image
           src="/login.png"
           width={300}

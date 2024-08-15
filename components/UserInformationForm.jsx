@@ -1,6 +1,14 @@
-const UserInformationForm = () => {
+const UserInformationForm = ({ setFormData, formData, error, setError }) => {
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevValues) => ({
+      ...prevValues,
+      [name]: type === "radio" ? (checked ? value : prevValues[name]) : value,
+    }));
+  };
+
   return (
-    <form className="space-y-6">
+    <form className="space-y-6 mb-5 lg:mb-0">
       <div className="flex items-center ">
         <label htmlFor="name" className="font-semibold text-lg mx-3 w-[25%]">
           الاسم
@@ -9,11 +17,11 @@ const UserInformationForm = () => {
           type="text"
           id="name"
           name="name"
-          className=" w-full px-2 py-3 border-none  bg-[#F5F7F8]"
-          required
+          value={formData.name}
+          onChange={handleChange}
+          className="w-full px-2 py-3 border-none bg-[#F5F7F8]"
         />
       </div>
-
       <div className="flex items-center ">
         <label htmlFor="email" className="font-semibold text-lg mx-3 w-[25%]">
           البريد الإلكتروني
@@ -22,8 +30,9 @@ const UserInformationForm = () => {
           type="email"
           id="email"
           name="email"
-          className=" w-full px-2 py-3 border-none  bg-[#F5F7F8]"
-          required
+          value={formData.email}
+          onChange={handleChange}
+          className="w-full px-2 py-3 border-none bg-[#F5F7F8]"
         />
       </div>
       <div className={`w-[90%] h-[3px] mx-auto bg-[#F5F7F8]`}></div>
@@ -36,8 +45,10 @@ const UserInformationForm = () => {
           <label>
             <input
               type="radio"
-              name="job_status"
-              value="student"
+              name="employment_status"
+              value="طالب"
+              checked={formData.employment_status === "طالب"}
+              onChange={handleChange}
               className="mx-2"
             />
             طالب
@@ -45,8 +56,10 @@ const UserInformationForm = () => {
           <label>
             <input
               type="radio"
-              name="job_status"
-              value="employee"
+              name="employment_status"
+              value="موظف"
+              checked={formData.employment_status === "موظف"}
+              onChange={handleChange}
               className="mx-2"
             />
             موظف
@@ -54,8 +67,10 @@ const UserInformationForm = () => {
           <label>
             <input
               type="radio"
-              name="job_status"
-              value="employer"
+              name="employment_status"
+              value="صاحب عمل"
+              checked={formData.employment_status === "صاحب عمل"}
+              onChange={handleChange}
               className="mx-2"
             />
             صاحب عمل
@@ -66,30 +81,35 @@ const UserInformationForm = () => {
       <div className={`w-[90%] h-[3px] mx-auto bg-[#F5F7F8]`}></div>
       <div className="flex items-center ">
         <label
-          htmlFor="education"
+          htmlFor="teaching"
           className="font-semibold text-lg mx-3 w-[25%]"
         >
           التعليم
         </label>
         <input
           type="text"
-          id="education"
-          name="education"
-          className=" w-full px-2 py-3 border-none  bg-[#F5F7F8]"
-          required
+          id="teaching"
+          name="teaching"
+          value={formData.teaching}
+          onChange={handleChange}
+          className="w-full px-2 py-3 border-none bg-[#F5F7F8]"
         />
       </div>
       <div className="flex items-center ">
         <div className="flex items-center w-full">
-          <label htmlFor="dob" className=" font-semibold text-lg mx-3 w-[41%]">
+          <label
+            htmlFor="date_of_birth"
+            className="font-semibold text-lg mx-3 w-[41%]"
+          >
             تاريخ الميلاد
           </label>
           <input
             type="date"
-            id="dob"
-            name="dob"
-            className=" w-[59%] px-2 py-3 border-none  bg-[#F5F7F8] "
-            required
+            id="date_of_birth"
+            name="date_of_birth"
+            value={formData.date_of_birth}
+            onChange={handleChange}
+            className="w-[59%] px-2 py-3 border-none bg-[#F5F7F8] "
           />
         </div>
 
@@ -104,41 +124,55 @@ const UserInformationForm = () => {
             type="number"
             id="age"
             name="age"
-            className="w-[70%] px-2 py-3 border-none  bg-[#F5F7F8]"
-            required
+            value={formData.age}
+            onChange={handleChange}
+            className="w-[70%] px-2 py-3 border-none bg-[#F5F7F8]"
           />
         </div>
       </div>
       <div className="flex items-center ">
-        <label
-          htmlFor="location"
-          className="font-semibold text-lg mx-3 w-[25%]"
-        >
+        <label htmlFor="address" className="font-semibold text-lg mx-3 w-[25%]">
           عنوان السكن
         </label>
         <input
           type="text"
-          id="location"
-          name="location"
-          className=" w-full px-2 py-3 border-none  bg-[#F5F7F8]"
-          required
+          id="address"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          className="w-full px-2 py-3 border-none bg-[#F5F7F8]"
         />
       </div>
       <div className={`w-[90%] h-[3px] mx-auto bg-[#F5F7F8]`}></div>
 
-      <div className="flex items-center">
+      <div className="flex items-center ">
         <span className="font-semibold text-lg mx-3 w-[25%]">الجنس</span>
         <div className="flex items-center justify-around w-full">
           <label>
-            <input type="radio" name="Gender" value="Male" className="mx-2" />
+            <input
+              type="radio"
+              name="gender"
+              value="ذكر"
+              checked={formData.gender === "ذكر"}
+              onChange={handleChange}
+              className="mx-2"
+            />
             ذكر
           </label>
           <label>
-            <input type="radio" name="Gender" value="female" className="mx-2" />
+            <input
+              type="radio"
+              name="gender"
+              value="انثى"
+              checked={formData.gender === "انثى"}
+              onChange={handleChange}
+              className="mx-2"
+            />
             انثى
           </label>
         </div>
       </div>
+      {error && <p className="text-red-500">{error}</p>}
     </form>
   );
 };

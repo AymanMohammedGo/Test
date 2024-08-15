@@ -80,11 +80,11 @@ const AdminStatistics = () => {
     },
   ];
   return (
-    <div className="flex items-center justify-between ">
+    <div className="flex flex-col lg:flex-row items-center justify-between ">
       {data.map((item, index) => (
         <div
           key={index}
-          className={`${item.bgColor} ${item.textColor} p-6 mx-4 my-8 rounded-xl flex flex-col w-full `}
+          className={`${item.bgColor} ${item.textColor} p-6 mx-4 my-2 lg:my-8 rounded-xl flex flex-col w-full `}
         >
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold">{item.title}</h3>

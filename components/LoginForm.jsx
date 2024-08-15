@@ -36,8 +36,10 @@ const LoginForm = () => {
     setLoading(false);
   };
   return (
-    <div className="py-24  px-[60px]">
-      <h1 className="font-light text-8xl mb-28">أهلن بك</h1>
+    <div className="py-8 lg:py-24  px-4 lg:px-[60px]">
+      <h1 className="font-light text-6xl lg:text-8xl mb-10 lg:mb-28">
+        أهلن بك
+      </h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="flex flex-col  ">
           <label htmlFor="name" className="font-semibold text-lg mb-4 ">

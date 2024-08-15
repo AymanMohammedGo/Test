@@ -71,9 +71,12 @@ const SurveryNavBar = () => {
   const sectionShow = useSelector((state) => state.section.sectionShow);
 
   return (
-    <nav className="flex items-center pb-20 ">
+    <nav className="flex flex-col  lg:flex-row items-center pb-4 lg:pb-20 ">
       {navItems.map((item, index) => (
-        <div key={index} className="flex items-center w-full ">
+        <div
+          key={index}
+          className="flex items-center justify-center my-3 lg:my-0 w-full "
+        >
           <span
             className={`font-bold text-lg ${
               sectionShow === item.id ? "text-primary" : "text-secondary"
@@ -90,7 +93,7 @@ const SurveryNavBar = () => {
           </span>
           {index !== navItems.length - 1 && (
             <div
-              className={`w-full h-[1px] ml-4 ${
+              className={`hidden lg:block lg:w-full h-[1px] ml-4 ${
                 sectionShow === item.id ? "bg-primary" : "bg-secondary"
               }`}
             ></div>
