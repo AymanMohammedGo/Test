@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
 const PollUsersListDialog = ({ setOpenDialog, OpenDialog, pollID }) => {
-  if (!OpenDialog) return null;
-
   const [data, setData] = useState({});
   const [pollPoints, setPollPoints] = useState(0);
 
@@ -31,6 +29,7 @@ const PollUsersListDialog = ({ setOpenDialog, OpenDialog, pollID }) => {
       PollDetails(pollID);
     }
   }, [pollID]);
+  if (!OpenDialog) return null;
 
   const usersPoints = data?.answers?.reduce((acc, item) => {
     const userId = item.user.id;
